@@ -2,5 +2,8 @@
 # Add this to .bashrc
 
 function go(){
-  echo hello world
+  if [ $1='devtrac' ]; then
+    path=~/code/devTrac
+  fi
+  cd $path
 }
