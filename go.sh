@@ -5,6 +5,7 @@ function go(){
   filename=~/code/go/.config
 
   if [ $# = 0 ]; then
+    # Show Go list
     echo "Go list"
     while read line
     do
@@ -13,12 +14,14 @@ function go(){
       echo " $key: $value"
     done < $filename
   elif [ $1 = "add" ]; then
+    # Add new Go
     if [ $# -lt 3 ]; then
       echo "Incorrect argument: use 'go add {alias} {path}"
     else
       echo "$2:$3" >> $filename
     fi
   else
+    # Go to
     path=0
     while read line
     do
