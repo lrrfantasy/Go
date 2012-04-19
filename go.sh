@@ -2,47 +2,37 @@
 # Add this to .bashrc
 
 function go(){
+  filename=~/code/go/.config
+
   if [ $# = 0 ]; then
-    list
+    echo "Go list"
+    while read line
+    do
+      key=`echo $line | cut -d ':' -f1`
+      value=`echo $line | cut -d ':' -f2`
+      echo " $key: $value"
+    done < $filename
   elif [ $1 = "add" ]; then
     if [ $# -lt 3 ]; then
       echo "Incorrect argument: use 'go add {alias} {path}"
     else
-      add $2 $3
+      echo "$2:$3" >> $filename
     fi
   else
-    to $1
-  fi
-}
+    path=0
+    while read line
+    do
+      key=`echo $line | cut -d ':' -f1`
+      value=`echo $line | cut -d ':' -f2`
+      if [ $1 = $key ]; then
+        path=$value
+      fi
+    done < $filename
 
-function to(){
-  filename=~/code/go/.config
-  path=0
-  while read line
-  do
-    key=`echo $line | cut -d ':' -f1`
-    value=`echo $line | cut -d ':' -f2`
-    if [ $1 = $key ]; then
-      path=$value
+    if [ $path = 0 ]; then
+      echo "No quick go found: $1"
+    else
+      cd $path
     fi
-  done < $filename
-  if [ $path = 0 ]; then
-    echo "No quick go found: $1"
-  else
-    cd $path
   fi
-}
-
-function list(){
-  echo "Go list"
-  while read line
-  do
-    key=`echo $line | cut -d ':' -f1`
-    value=`echo $line | cut -d ':' -f2`
-    echo " $key: $value"
-  done < $filename
-}
-
-function add(){
-  echo "$1:$2" >> $filename
 }
