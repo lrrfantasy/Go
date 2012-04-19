@@ -4,6 +4,12 @@
 function go(){
   if [ $# = 0 ]; then
     list
+  elif [ $1 = "add" ]; then
+    if [ $# -lt 2 ]; then
+      echo "Incorrect argument: use 'go add {alias} {path}"
+    else
+      add $2 $3
+    fi
   else
     to $1
   fi
@@ -35,4 +41,8 @@ function list(){
     value=`echo $line | cut -d ':' -f2`
     echo " $key: $value"
   done < $filename
+}
+
+function add(){
+  echo "$1:$2" >> $filename
 }
