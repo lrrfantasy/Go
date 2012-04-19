@@ -30,7 +30,7 @@ function go(){
     done < $filename
 
     if [ $path = 0 ]; then
-      echo "No quick go found: $1"
+      echo "No Go found: $1"
     else
       cd $path
     fi
