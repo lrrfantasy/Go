@@ -2,7 +2,16 @@
 # Add this to .bashrc
 
 function go(){
+  if [ $# = 0 ]; then
+    echo Error
+  else
+    to $1
+  fi
+}
+
+function to(){
   filename=~/code/go/.config
+  path=0
   while read line
   do
     key=`echo $line | cut -d ':' -f1`
@@ -11,6 +20,9 @@ function go(){
       path=$value
     fi
   done < $filename
-
-  cd $path
+  if [ $path = 0 ]; then
+    echo "No quick go found: $1"
+  else
+    cd $path
+  fi
 }
