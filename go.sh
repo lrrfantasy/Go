@@ -5,7 +5,7 @@ function go(){
   if [ $# = 0 ]; then
     list
   elif [ $1 = "add" ]; then
-    if [ $# -lt 2 ]; then
+    if [ $# -lt 3 ]; then
       echo "Incorrect argument: use 'go add {alias} {path}"
     else
       add $2 $3
