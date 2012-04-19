@@ -3,7 +3,7 @@
 
 function go(){
   if [ $# = 0 ]; then
-    echo Error
+    list
   else
     to $1
   fi
@@ -25,4 +25,14 @@ function to(){
   else
     cd $path
   fi
+}
+
+function list(){
+  echo "Go list"
+  while read line
+  do
+    key=`echo $line | cut -d ':' -f1`
+    value=`echo $line | cut -d ':' -f2`
+    echo " $key: $value"
+  done < $filename
 }
