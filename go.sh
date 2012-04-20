@@ -16,7 +16,7 @@ function go(){
   elif [ $1 = "add" ]; then
     # Add new Go
     if [ $# -lt 3 ]; then
-      echo "Incorrect argument: use 'go add {alias} {path}"
+      echo "Incorrect argument: use 'go add {alias} {path}'"
     else
       echo "$2:$3" >> $filename
     fi
