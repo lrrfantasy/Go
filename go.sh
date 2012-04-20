@@ -20,6 +20,19 @@ function go(){
     else
       echo "$2:$3" >> $filename
     fi
+  elif [ $1 = "rm" ]; then
+    # Remove Go
+    if [ $# -lt 2 ]; then
+      echo "Incorrect argument: use 'go rm {alias}'"
+    else
+      echo "Remove $2..."
+      result=`grep $2 $filename`
+      if [ $? -eq 1 ]; then
+        echo "No Go found: $2"
+      else
+        sed -i '' -e "/$2/d" "$filename"
+      fi
+    fi
   else
     # Go to
     path=0
