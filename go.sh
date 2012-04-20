@@ -4,7 +4,7 @@
 function go(){
   filename=~/code/go/.config
 
-  if [ $# = 0 ]; then
+  if [[ $# = 0 || $1 = "list" ]]; then
     # Show Go list
     echo "Go list"
     while read line
