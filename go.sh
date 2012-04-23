@@ -33,11 +33,25 @@ function go(){
         sed -i '' -e "/$2/d" "$filename"
       fi
     fi
+  elif [ $1 = "edit" ]; then
+    # Edit Go
+    if [ $# -lt 2 ]; then
+      echo "Incorrect argument: use 'go edit {alias} {new_path}'"
+    else
+      result=`grep $2 $filename`
+      if [ $? -eq 1 ]; then
+        echo "No Go found: $2"
+      else
+        sed -i '' -e "s%$2:.*%$2:$3%g" "$filename"
+        echo "$2: $3"
+      fi
+    fi
   elif [ $1 = "help" ]; then
     echo "Go help"
     echo " go [list]: Display Go list"
     echo " go add {alias} {path}: Add a new Go connected to path"
     echo " go rm {alias}: Remove an existing Go"
+    echo " go edit {alias} {new_path}: Edit an existing Go"
   else
     # Go to
     path=0
