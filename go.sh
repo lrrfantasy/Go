@@ -54,6 +54,7 @@ function go(){
       echo "No Go found: $1"
     else
       cd $path
+      echo "Go to $PWD"
     fi
   fi
 }
