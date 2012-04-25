@@ -19,6 +19,7 @@ function go(){
       echo "Incorrect argument: use 'go add {alias} {path}'"
     else
       echo "$2:$3" >> $filename
+      sed -i '' -e "s%~%$HOME%g" "$filename"
     fi
   elif [ $1 = "rm" ]; then
     # Remove Go
@@ -43,6 +44,7 @@ function go(){
         echo "No Go found: $2"
       else
         sed -i '' -e "s%$2:.*%$2:$3%g" "$filename"
+        sed -i '' -e "s%~%$HOME%g" "$filename"
         echo "$2: $3"
       fi
     fi
