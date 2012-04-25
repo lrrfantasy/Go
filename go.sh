@@ -27,11 +27,11 @@ function go(){
       echo "Incorrect argument: use 'go rm {alias}'"
     else
       echo "Remove $2..."
-      result=`grep $2 $filename`
+      result=`grep ^$2: $filename`
       if [ $? -eq 1 ]; then
         echo "No Go found: $2"
       else
-        sed -i '' -e "/$2/d" "$filename"
+        sed -i '' -e "/^$2:/d" "$filename"
       fi
     fi
   elif [ $1 = "edit" ]; then
