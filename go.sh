@@ -39,11 +39,11 @@ function go(){
     if [ $# -lt 2 ]; then
       echo "Incorrect argument: use 'go edit {alias} {new_path}'"
     else
-      result=`grep $2 $filename`
+      result=`grep ^$2: $filename`
       if [ $? -eq 1 ]; then
         echo "No Go found: $2"
       else
-        sed -i '' -e "s%$2:.*%$2:$3%g" "$filename"
+        sed -i '' -e "s%^$2:.*%$2:$3%g" "$filename"
         sed -i '' -e "s%~%$HOME%g" "$filename"
         echo "$2: $3"
       fi
@@ -53,7 +53,12 @@ function go(){
     if [ $# -lt 2 ]; then
       echo "Incorrect argument: use 'go ? {alias}'"
     else
-      grep "$2:" $filename
+      result=`grep "^$2:" $filename`
+      if [ $? -eq 1 ]; then
+        echo "No Go found: $2"
+      else
+        grep "^$2:" $filename
+      fi
     fi
   elif [ $1 = "help" ]; then
     echo "Go help"
