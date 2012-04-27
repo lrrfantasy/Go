@@ -3,10 +3,10 @@
 echo "Initializing go environment"
 echo "source $PWD/go.sh" >> ~/.bashrc
 
-echo "Reloading Bash"
-exec bash
-
 echo "Creating configuration file"
-touch .config
+echo "" > .config
 
+echo "Reloading Bash"
 echo "Installation succeeded."
+
+exec bash
