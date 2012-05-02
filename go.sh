@@ -2,7 +2,7 @@
 # Add this to .bashrc
 
 function go(){
-  filename=~/code/go/.config
+  filename=~/.config
 
   if [[ $# = 0 || $1 = "list" ]]; then
     # Show Go list
