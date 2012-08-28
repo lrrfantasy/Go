@@ -2,7 +2,7 @@
 # Add this to .bashrc
 
 function go(){
-  filename=~/.config
+  filename=~/code/go/.config
 
   if [[ $# = 0 || $1 = "list" ]]; then
     # Show Go list
@@ -20,6 +20,7 @@ function go(){
     else
       echo "$2:$3" >> $filename
       sed -i '' -e "s%~%$HOME%g" "$filename"
+      sed -i '' -e "s%\.%$PWD%g" "$filename"
     fi
   elif [ $1 = "rm" ]; then
     # Remove Go
