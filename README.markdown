@@ -13,7 +13,7 @@ Run `./init.sh` in the directory which you put Go in.
 `go` or `go list`: display Go list.
 
 ###Add
-`go add {alias} {path}`: add new Go. Example: `go ad.d home /Users/alex/homepage`.
+`go add {alias} {path}`: add new Go. Example: `go add home /Users/alex/homepage`.
 
 ###Remove
 `go rm {alias}`: remove a Go. Example: `go rm home`.
