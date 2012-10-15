@@ -62,12 +62,40 @@ function go(){
       fi
     fi
   elif [ $1 = "help" ]; then
-    echo "Go help"
-    echo " go [list]: Display Go list"
-    echo " go add {alias} {path}: Add a new Go connected to path"
-    echo " go rm {alias}: Remove an existing Go"
-    echo " go edit {alias} {new_path}: Edit an existing Go"
-    echo " go ? {alias}: Search a Go"
+    if [ $# -eq 1 ]; then
+      echo "Go help"
+      echo " go [list]: Display Go list"
+      echo " go add {alias} {path}: Add a new Go connected to path"
+      echo " go rm {alias}: Remove an existing Go"
+      echo " go edit {alias} {new_path}: Edit an existing Go"
+      echo " go ? {alias}: Search a Go"
+      echo " Use go help [argument] for more detail help"
+    elif [ $# -eq 2 ]; then
+      case $2 in
+        "list")
+          echo " go [list]: Display Go list"
+          ;;
+        "add")
+          echo " go add {alias} {path}: Add a new Go connected to path"
+          echo " Example: go add home /Users/alice/homepage"
+          ;;
+        "rm")
+          echo " go rm {alias}: Remove an exsiting Go"
+          echo " Example: go rm home"
+          ;;
+        "edit")
+          echo " go edit {alias} {new_path}: Edit an existing Go"
+          echo " Example: go edit home /Users/alice/home"
+          ;;
+        "?")
+          echo " go ? {alias}"
+          echo " Example: go ? home"
+          ;;
+        *)
+          echo " No command found: $2"
+          ;;
+      esac
+    fi
   else
     # Go to
     path=0
