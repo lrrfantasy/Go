@@ -2,12 +2,13 @@
 
 ##Install
 
-Run `./init.sh` in the directory which you put Go in.
+Run `./init.sh` in the directory where you put Go.
 
 ##Usage
 
 ###Help
 `go help`: display help for Go.
+`go help {command}`: display help for command.
 
 ###List
 `go` or `go list`: display Go list.
@@ -22,4 +23,4 @@ Run `./init.sh` in the directory which you put Go in.
 `go edit {alias} {path}`: edit a Go. Example: `go edit home /Users/alice/home`.
 
 ###Search
-`go ? {alias}`: search for a Go. Example: `go ? home`.
+`go ? {alias}` or `go grep {alias}`: search for a Go. Example: `go ? home` or `go grep home`.

@@ -49,10 +49,10 @@ function go(){
         echo "$2: $3"
       fi
     fi
-  elif [ $1 = "?" ]; then
+  elif [[ $1 = "?" || $1 = "grep" ]]; then
     # Search Go
     if [ $# -lt 2 ]; then
-      echo "Incorrect argument: use 'go ? {alias}'"
+      echo "Incorrect argument: use 'go ?|grep {alias}'"
     else
       grep "^$2:" $filename > /dev/null
       if [ $? -eq 1 ]; then
@@ -68,7 +68,7 @@ function go(){
       echo " go add {alias} {path}: Add a new Go connected to path"
       echo " go rm {alias}: Remove an existing Go"
       echo " go edit {alias} {new_path}: Edit an existing Go"
-      echo " go ? {alias}: Search a Go"
+      echo " go ?|grep {alias}: Search a Go"
       echo " Use go help [argument] for more detail help"
     elif [ $# -eq 2 ]; then
       case $2 in
@@ -87,9 +87,9 @@ function go(){
           echo " go edit {alias} {new_path}: Edit an existing Go"
           echo " Example: go edit home /Users/alice/home"
           ;;
-        "?")
-          echo " go ? {alias}"
-          echo " Example: go ? home"
+        "?"|"grep")
+          echo " go ?|grep {alias}"
+          echo " Example: go ?|grep home"
           ;;
         *)
           echo " No command found: $2"
