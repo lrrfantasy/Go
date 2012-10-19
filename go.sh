@@ -40,7 +40,7 @@ function go(){
     if [ $# -lt 2 ]; then
       echo "Incorrect argument: use 'go edit {alias} {new_path}'"
     else
-      grep ^$2: $filename > /dev/null
+      grep -q ^$2: $filename
       if [ $? -eq 1 ]; then
         echo "No Go found: $2"
       else
@@ -54,7 +54,7 @@ function go(){
     if [ $# -lt 2 ]; then
       echo "Incorrect argument: use 'go ?|grep {alias}'"
     else
-      grep "^$2:" $filename > /dev/null
+      grep -q "^$2:" $filename
       if [ $? -eq 1 ]; then
         echo "No Go found: $2"
       else
