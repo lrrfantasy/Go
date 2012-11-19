@@ -17,6 +17,7 @@ function go(){
     # Add new Go
     if [ $# -lt 3 ]; then
       echo "Incorrect argument: use 'go add {alias} {path}'"
+      return 1
     else
       echo "$2:$3" >> $filename
       sed -i '' -e "s%~%$HOME%g" "$filename"
@@ -26,11 +27,13 @@ function go(){
     # Remove Go
     if [ $# -lt 2 ]; then
       echo "Incorrect argument: use 'go rm {alias}'"
+      return 1
     else
       echo "Remove $2..."
       result=`grep ^$2: $filename`
       if [ $? -eq 1 ]; then
         echo "No Go found: $2"
+	return 1
       else
         sed -i '' -e "/^$2:/d" "$filename"
       fi
@@ -39,10 +42,12 @@ function go(){
     # Edit Go
     if [ $# -lt 2 ]; then
       echo "Incorrect argument: use 'go edit {alias} {new_path}'"
+      return 1
     else
       grep -q ^$2: $filename
       if [ $? -eq 1 ]; then
         echo "No Go found: $2"
+	return 1
       else
         sed -i '' -e "s%^$2:.*%$2:$3%g" "$filename"
         sed -i '' -e "s%~%$HOME%g" "$filename"
@@ -53,10 +58,12 @@ function go(){
     # Search Go
     if [ $# -lt 2 ]; then
       echo "Incorrect argument: use 'go ?|grep {alias}'"
+      return 1
     else
       grep -q "^$2:" $filename
       if [ $? -eq 1 ]; then
         echo "No Go found: $2"
+	return 1
       else
         grep "^$2:" $filename
       fi
@@ -93,6 +100,7 @@ function go(){
           ;;
         *)
           echo " No command found: $2"
+	  return 1
           ;;
       esac
     fi
@@ -110,6 +118,7 @@ function go(){
 
     if [ $path = 0 ]; then
       echo "No Go found: $1"
+      return 1
     else
       cd $path
       echo "Go to $PWD"
