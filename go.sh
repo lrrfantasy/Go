@@ -13,6 +13,7 @@ function go(){
       value=`echo $line | cut -d ':' -f2`
       echo " $key: $value"
     done < $filename
+
   elif [ $1 = "add" ]; then
     # Add new Go
     case $2 in
@@ -40,6 +41,7 @@ function go(){
         fi
         ;;
     esac
+
   elif [ $1 = "rm" ]; then
     # Remove Go
     if [ $# -lt 2 ]; then
@@ -55,6 +57,7 @@ function go(){
         sed -i '' -e "/^$2:/d" "$filename"
       fi
     fi
+
   elif [ $1 = "edit" ]; then
     # Edit Go
     if [ $# -lt 2 ]; then
@@ -81,6 +84,7 @@ function go(){
         echo "$2: $path"
       fi
     fi
+
   elif [ $1 = "mv" ]; then
     # Rename Go
     if [ $# -lt 2]; then
@@ -95,6 +99,7 @@ function go(){
         sed -i '' -e "s%^$2:\(.*\)%$3:\1%g" "$filename"
       fi
     fi
+
   elif [[ $1 = "?" || $1 = "grep" ]]; then
     # Search Go
     if [ $# -lt 2 ]; then
@@ -109,6 +114,7 @@ function go(){
         grep "^$2:" $filename
       fi
     fi
+
   elif [ $1 = "help" ]; then
     if [ $# -eq 1 ]; then
       echo "Go help"
@@ -145,6 +151,7 @@ function go(){
           ;;
       esac
     fi
+
   else
     # Go to
     while read line
