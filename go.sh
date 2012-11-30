@@ -16,19 +16,19 @@ function go(){
   elif [ $1 = "add" ]; then
     # Add new Go
     case $2 in
-    list|add|rm|?|grep|edit|help)
-      echo "$2 is a keyword. Please use another Go name"
-      ;;
-    *)
-      if [ $# -lt 3 ]; then
-        echo "Incorrect argument: use 'go add {alias} {path}'"
-        return 1
-      else
-        echo "$2:$3" >> $filename
-        sed -i '' -e "s%~%$HOME%g" "$filename"
-        sed -i '' -e "s%\.%$PWD%g" "$filename"
-      fi
-      ;;
+      list|add|rm|?|grep|edit|help)
+        echo "$2 is a keyword. Please use another Go name"
+        ;;
+      *)
+        if [ $# -lt 3 ]; then
+          echo "Incorrect argument: use 'go add {alias} {path}'"
+          return 1
+        else
+          echo "$2:$3" >> $filename
+          sed -i '' -e "s%~%$HOME%g" "$filename"
+          sed -i '' -e "s%\.%$PWD%g" "$filename"
+        fi
+        ;;
     esac
   elif [ $1 = "rm" ]; then
     # Remove Go
