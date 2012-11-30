@@ -147,7 +147,6 @@ function go(){
     fi
   else
     # Go to
-    path=0
     while read line
     do
       key=`echo $line | cut -d ':' -f1`
@@ -157,7 +156,7 @@ function go(){
       fi
     done < $filename
 
-    if [ $path = 0 ]; then
+    if [ -z $path ]; then
       echo "No Go found: $1"
       return 1
     else
