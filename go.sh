@@ -24,9 +24,19 @@ function go(){
           echo "Incorrect argument: use 'go add {alias} {path}'"
           return 1
         else
-          echo "$2:$3" >> $filename
-          sed -i '' -e "s%~%$HOME%g" "$filename"
-          sed -i '' -e "s%\.%$PWD%g" "$filename"
+          case $3 in
+            .)
+              path=$PWD
+              ;;
+            ~)
+              path=$HOME
+              ;;
+            *)
+              path=$3
+              ;;
+          esac
+          echo "$2:$path" >> $filename
+          echo "Added new Go $2: $path"
         fi
         ;;
     esac
@@ -56,9 +66,19 @@ function go(){
         echo "No Go found: $2"
 	return 1
       else
-        sed -i '' -e "s%^$2:.*%$2:$3%g" "$filename"
-        sed -i '' -e "s%~%$HOME%g" "$filename"
-        echo "$2: $3"
+        case $3 in
+	  .)
+	    path=$PWD
+	    ;;
+	  ~)
+	    path=$HOME
+	    ;;
+	  *)
+	    path=$3
+	    ;;
+        esac
+        sed -i '' -e "s%^$2:.*%$2:$path%g" "$filename"
+        echo "$2: $path"
       fi
     fi
   elif [ $1 = "mv" ]; then
