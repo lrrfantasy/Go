@@ -61,6 +61,20 @@ function go(){
         echo "$2: $3"
       fi
     fi
+  elif [ $1 = "mv" ]; then
+    # Rename Go
+    if [ $# -lt 2]; then
+      echo "Incorrect argument: use 'go mv {old_alias} {new_alias}'"
+      return 1
+    else
+      grep -q ^$2: $filename
+      if [ $? -eq 1 ]; then
+        echo "No Go found: $2"
+	return 1
+      else
+        sed -i '' -e "s%^$2:\(.*\)%$3:\1%g" "$filename"
+      fi
+    fi
   elif [[ $1 = "?" || $1 = "grep" ]]; then
     # Search Go
     if [ $# -lt 2 ]; then
