@@ -165,4 +165,6 @@ function go(){
       echo "Go to $PWD"
     fi
   fi
+
+unset path
 }
