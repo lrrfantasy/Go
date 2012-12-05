@@ -22,5 +22,8 @@ Run `./init.sh` in the directory where you put Go.
 ###Edit
 `go edit {alias} {path}`: edit a Go. Example: `go edit home /Users/alice/home`.
 
+###Rename
+`go mv {old_alias} {new_alias}`: rename a Go. Example: `go mv home homepage`.
+
 ###Search
 `go ? {alias}` or `go grep {alias}`: search for a Go. Example: `go ? home` or `go grep home`.

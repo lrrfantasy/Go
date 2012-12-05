@@ -122,6 +122,7 @@ function go(){
       echo " go add {alias} {path}: Add a new Go connected to path"
       echo " go rm {alias}: Remove an existing Go"
       echo " go edit {alias} {new_path}: Edit an existing Go"
+      echo " go mv {old_alias} {new_alais}: Rename a Go"
       echo " go ?|grep {alias}: Search a Go"
       echo " Use go help [argument] for more detail help"
     elif [ $# -eq 2 ]; then
@@ -141,6 +142,10 @@ function go(){
           echo " go edit {alias} {new_path}: Edit an existing Go"
           echo " Example: go edit home /Users/alice/home"
           ;;
+	"mv")
+	  echo " go mv {old_alias} {new_alias}: Rename a Go"
+	  echo " Example: go edit home homepage"
+	  ;;
         "?"|"grep")
           echo " go ?|grep {alias}"
           echo " Example: go ?|grep home"
