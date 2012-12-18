@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 # Add this to .bashrc
 
+realpath(){
+  local parent_dir=$(dirname "$1")
+  cd "$parent_dir"
+  local abs_path="$(pwd)"/"$(basename $1)"
+  cd - > /dev/null
+  echo $abs_path
+}
+
 function go(){
   filename=~/code/go/.config
 
@@ -25,17 +33,7 @@ function go(){
           echo "Incorrect argument: use 'go add {alias} {path}'"
           return 1
         else
-          case $3 in
-            .)
-              path=$PWD
-              ;;
-            ~)
-              path=$HOME
-              ;;
-            *)
-              path=$3
-              ;;
-          esac
+	  path=$(realpath $3)
           echo "$2:$path" >> $filename
           echo "Added new Go $2: $path"
         fi
@@ -69,17 +67,7 @@ function go(){
         echo "No Go found: $2"
 	return 1
       else
-        case $3 in
-	  .)
-	    path=$PWD
-	    ;;
-	  ~)
-	    path=$HOME
-	    ;;
-	  *)
-	    path=$3
-	    ;;
-        esac
+	path=$(realpath $3)
         sed -i '' -e "s%^$2:.*%$2:$path%g" "$filename"
         echo "$2: $path"
       fi
