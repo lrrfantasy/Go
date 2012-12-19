@@ -27,7 +27,7 @@ function go(){
   elif [ $1 = "add" ]; then
     # Add new Go
     case $2 in
-      list|add|rm|?|grep|edit|help)
+      go|list|add|rm|?|grep|edit|help)
         echo "$2 is a keyword. Please use another Go name"
         ;;
       *)
