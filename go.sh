@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Add this to .bashrc
 
+source ./.go-completion.bash
+
 realpath(){
   local parent_dir=$(dirname "$1")
   cd "$parent_dir"
