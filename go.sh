@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
-# Add this to .bashrc
+# Add these lines to .bashrc
+# export GO_HOME=
+# source $GO_HOME/go.sh
 
-source ./.go-completion.bash
+source ${GO_HOME}/.go-completion.bash
 
 realpath(){
   local parent_dir=$(dirname "$1")
@@ -12,7 +14,7 @@ realpath(){
 }
 
 function go(){
-  filename=~/code/go/.config
+  filename=${GO_HOME}/.config
 
   if [[ $# = 0 || $1 = "list" ]]; then
     # Show Go list

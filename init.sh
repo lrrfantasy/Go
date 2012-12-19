@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
 echo "Initializing go environment"
-echo "source $PWD/go.sh" >> ~/.bashrc
+echo "export GO_HOME=`pwd`" >> ~/.bashrc
+echo "source \$GO_HOME/go.sh" >> ~/.bashrc
 
 echo "Creating configuration file"
-echo "" > .config
-sed -i '' -e "s%filename=~%filename=$PWD%g" ./go.sh
+touch .config
 
 echo "Reloading Bash"
 echo "Installation succeeded."
