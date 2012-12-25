@@ -19,11 +19,7 @@ _go_complete(){
       COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
       return 0
       ;;
-    *)
-      COMPREPLY=( $(compgen -f ${cur}) )
-      return 0
-      ;;
   esac
 }
 
-complete -F _go_complete go
+complete -o default -F _go_complete go
