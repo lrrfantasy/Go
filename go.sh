@@ -23,12 +23,8 @@ function go(){
   if [[ $# = 0 || $1 = "list" ]]; then
     # Show Go list
     echo "Go list"
-    while read line
-    do
-      key=`echo $line | cut -d '=' -f1`
-      value=`echo $line | cut -d '=' -f2`
-      echo " $key=$value"
-    done < $filename
+    echo ""
+    cat $filename | sort
 
   elif [ $1 = "add" ]; then
     # Add new Go
