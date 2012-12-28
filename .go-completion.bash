@@ -4,7 +4,7 @@ _go_complete(){
   cur="${COMP_WORDS[COMP_CWORD]}"
   prev="${COMP_WORDS[COMP_CWORD-1]}"
   go_list="$(for name in `cat ${GO_HOME}/.config | cut -d ":" -f1`; do echo $name; done)"
-  opts="list add rm edit mv ? grep help"
+  opts="list add rm edit mv grep help"
 
   case $prev in
     go)

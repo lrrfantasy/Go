@@ -29,7 +29,7 @@ function go(){
   elif [ $1 = "add" ]; then
     # Add new Go
     case $2 in
-      go|list|add|rm|?|grep|edit|help)
+      go|list|add|rm|grep|edit|help)
         echo "$2 is a keyword. Please use another Go name"
         ;;
       *)
@@ -92,10 +92,10 @@ function go(){
       fi
     fi
 
-  elif [[ $1 = "?" || $1 = "grep" ]]; then
+  elif [[ $1 = "grep" ]]; then
     # Search Go
     if [ $# -lt 2 ]; then
-      echo "Incorrect argument: use 'go ?|grep {alias}'"
+      echo "Incorrect argument: use 'go grep {alias}'"
       return 1
     else
       grep -q "^$2:" $filename
@@ -115,7 +115,7 @@ function go(){
       echo " go rm {alias}: Remove an existing Go"
       echo " go edit {alias} {new_path}: Edit an existing Go"
       echo " go mv {old_alias} {new_alais}: Rename a Go"
-      echo " go ?|grep {alias}: Search a Go"
+      echo " go grep {alias}: Search a Go"
       echo " Use go help [argument] for more detail help"
     elif [ $# -eq 2 ]; then
       case $2 in
@@ -138,9 +138,9 @@ function go(){
 	  echo " go mv {old_alias} {new_alias}: Rename a Go"
 	  echo " Example: go edit home homepage"
 	  ;;
-        "?"|"grep")
-          echo " go ?|grep {alias}"
-          echo " Example: go ?|grep home"
+        "grep")
+          echo " go grep {alias}"
+          echo " Example: go grep home"
           ;;
         *)
           echo " No command found: $2"

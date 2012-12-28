@@ -26,4 +26,4 @@ Run `./init.sh` in the directory where you put Go.
 `go mv {old_alias} {new_alias}`: rename a Go. Example: `go mv home homepage`.
 
 ###Search
-`go ? {alias}` or `go grep {alias}`: search for a Go. Example: `go ? home` or `go grep home`.
+`go grep {alias}`: search for a Go. Example: `go ? home` or `go grep home`.
