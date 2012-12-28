@@ -21,9 +21,9 @@ function go(){
     echo "Go list"
     while read line
     do
-      key=`echo $line | cut -d ':' -f1`
-      value=`echo $line | cut -d ':' -f2`
-      echo " $key: $value"
+      key=`echo $line | cut -d '=' -f1`
+      value=`echo $line | cut -d '=' -f2`
+      echo " $key=$value"
     done < $filename
 
   elif [ $1 = "add" ]; then
@@ -38,8 +38,8 @@ function go(){
           return 1
         else
 	  path=$(realpath $3)
-          echo "$2:$path" >> $filename
-          echo "Added new Go $2: $path"
+          echo "$2=$path" >> $filename
+          echo "Added new Go $2=$path"
         fi
         ;;
     esac
@@ -51,12 +51,12 @@ function go(){
       return 1
     else
       echo "Remove $2..."
-      result=`grep ^$2: $filename`
+      result=`grep ^$2= $filename`
       if [ $? -eq 1 ]; then
         echo "No Go found: $2"
 	return 1
       else
-        sed -i '' -e "/^$2:/d" "$filename"
+        sed -i '' -e "/^$2=/d" "$filename"
       fi
     fi
 
@@ -66,29 +66,29 @@ function go(){
       echo "Incorrect argument: use 'go edit {alias} {new_path}'"
       return 1
     else
-      grep -q ^$2: $filename
+      grep -q ^$2= $filename
       if [ $? -eq 1 ]; then
         echo "No Go found: $2"
 	return 1
       else
 	path=$(realpath $3)
-        sed -i '' -e "s%^$2:.*%$2:$path%g" "$filename"
-        echo "$2: $path"
+        sed -i '' -e "s%^$2=.*%$2=$path%g" "$filename"
+        echo "$2=$path"
       fi
     fi
 
   elif [ $1 = "mv" ]; then
     # Rename Go
-    if [ $# -lt 2]; then
+    if [ $# -lt 2 ]; then
       echo "Incorrect argument: use 'go mv {old_alias} {new_alias}'"
       return 1
     else
-      grep -q ^$2: $filename
+      grep -q ^$2= $filename
       if [ $? -eq 1 ]; then
         echo "No Go found: $2"
 	return 1
       else
-        sed -i '' -e "s%^$2:\(.*\)%$3:\1%g" "$filename"
+        sed -i '' -e "s%^$2=\(.*\)%$3=\1%g" "$filename"
       fi
     fi
 
@@ -98,12 +98,12 @@ function go(){
       echo "Incorrect argument: use 'go grep {alias}'"
       return 1
     else
-      grep -q "^$2:" $filename
+      grep -q "^$2=" $filename
       if [ $? -eq 1 ]; then
         echo "No Go found: $2"
 	return 1
       else
-        grep "^$2:" $filename
+        grep "^$2=" $filename
       fi
     fi
 
@@ -153,8 +153,8 @@ function go(){
     # Go to
     while read line
     do
-      key=`echo $line | cut -d ':' -f1`
-      value=`echo $line | cut -d ':' -f2`
+      key=`echo $line | cut -d '=' -f1`
+      value=`echo $line | cut -d '=' -f2`
       if [ $1 = $key ]; then
         path=$value
       fi
