@@ -6,11 +6,15 @@
 source ${GO_HOME}/.go-completion.bash
 
 realpath(){
-  local parent_dir=$(dirname "$1")
-  cd "$parent_dir"
-  local abs_path="$(pwd)"/"$(basename $1)"
-  cd - > /dev/null
-  echo $abs_path
+  if echo $1 | grep -q "^http"; then
+    echo $1
+  else
+    local parent_dir=$(dirname "$1")
+    cd "$parent_dir"
+    local abs_path="$(pwd)"/"$(basename $1)"
+    cd - > /dev/null
+    echo $abs_path
+  fi
 }
 
 function go(){
@@ -164,8 +168,12 @@ function go(){
       echo "No Go found: $1"
       return 1
     else
-      cd $path
-      echo "Go to $PWD"
+      if echo $path | egrep -q "^http"; then
+        open $path
+      else
+        cd $path
+        echo "Go to $PWD"
+      fi
     fi
   fi
 
