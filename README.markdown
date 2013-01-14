@@ -8,6 +8,7 @@ Run `./init.sh` in the directory where you put Go.
 
 ###Help
 `go help`: display help for Go.
+
 `go help {command}`: display help for command.
 
 ###List
