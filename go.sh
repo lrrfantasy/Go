@@ -160,14 +160,14 @@ function go(){
       fi
     done < $filename
 
-    if [ -z $path ]; then
+    if [ -z "$path" ]; then
       echo "No Go found: $1"
       return 1
     else
       if echo $path | egrep -q "^http"; then
-        open $path
+        open "$path"
       else
-        cd $path
+        cd "$path"
         echo "Go to $PWD"
       fi
     fi
